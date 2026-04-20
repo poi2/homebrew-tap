@@ -1,36 +1,36 @@
 class Dbgfmt < Formula
   desc "Pretty-print Rust Debug trait output with proper indentation"
   homepage "https://github.com/poi2/dbgfmt"
-  version "0.2.0"
+  version "0.3.0"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/poi2/dbgfmt/releases/download/v0.2.0/dbgfmt-aarch64-apple-darwin.tar.xz"
-      sha256 "f84c2ea352163a0c2f8d19efde7ea0d3f271fd02cc075a84b21c43ff78cfcb9f"
+      url "https://github.com/poi2/dbgfmt/releases/download/v0.3.0/dbgfmt-aarch64-apple-darwin.tar.xz"
+      sha256 "3f7208024ea68d9394399387e20e3cf3993ab6c626e6bb5af0676bb6ff97a2a0"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/poi2/dbgfmt/releases/download/v0.2.0/dbgfmt-x86_64-apple-darwin.tar.xz"
-      sha256 "0aca33a5f56cc85dd6bf3f43e2b40247842942b29c795b8d1ac58e15b414f6d1"
+      url "https://github.com/poi2/dbgfmt/releases/download/v0.3.0/dbgfmt-x86_64-apple-darwin.tar.xz"
+      sha256 "7ffe387659c7db1853dcc472a9b153c512da0937a771cc550445a3623345a629"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/poi2/dbgfmt/releases/download/v0.2.0/dbgfmt-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "d2d53d6fdedccb74678ba0baaa6912f938fa1f80df6843bc14875dd2bd318f73"
+      url "https://github.com/poi2/dbgfmt/releases/download/v0.3.0/dbgfmt-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "d52df50a0784b7c3eadc86d50f3d3cd3acde641e8f8377e49560fced0cc9b5aa"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/poi2/dbgfmt/releases/download/v0.2.0/dbgfmt-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "cfe6264a6371d8d0c5c7ea19c95b725e0cee179197893ca3796772a5e46cfe81"
+      url "https://github.com/poi2/dbgfmt/releases/download/v0.3.0/dbgfmt-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "ee29760c64067e8999d24ae9aa06890a28aeb0e8933c95c97f79747fc0c8ba5d"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
 
   BINARY_ALIASES = {
-    "aarch64-apple-darwin":      {},
+    "aarch64-apple-darwin": {},
     "aarch64-unknown-linux-gnu": {},
-    "x86_64-apple-darwin":       {},
-    "x86_64-pc-windows-gnu":     {},
-    "x86_64-unknown-linux-gnu":  {},
-  }.freeze
+    "x86_64-apple-darwin": {},
+    "x86_64-pc-windows-gnu": {},
+    "x86_64-unknown-linux-gnu": {}
+  }
 
   def target_triple
     cpu = Hardware::CPU.arm? ? "aarch64" : "x86_64"
@@ -48,10 +48,18 @@ class Dbgfmt < Formula
   end
 
   def install
-    bin.install "dbgfmt" if OS.mac? && Hardware::CPU.arm?
-    bin.install "dbgfmt" if OS.mac? && Hardware::CPU.intel?
-    bin.install "dbgfmt" if OS.linux? && Hardware::CPU.arm?
-    bin.install "dbgfmt" if OS.linux? && Hardware::CPU.intel?
+    if OS.mac? && Hardware::CPU.arm?
+      bin.install "dbgfmt"
+    end
+    if OS.mac? && Hardware::CPU.intel?
+      bin.install "dbgfmt"
+    end
+    if OS.linux? && Hardware::CPU.arm?
+      bin.install "dbgfmt"
+    end
+    if OS.linux? && Hardware::CPU.intel?
+      bin.install "dbgfmt"
+    end
 
     install_binary_aliases!
 
